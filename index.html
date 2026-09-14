@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome Jude & Eliott 🚀</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
+
+    :root {
+      --sf-blue: #00A1E0;
+      --sf-dark: #032D60;
+      --sf-purple: #7B5EA7;
+      --sf-teal: #06A59A;
+      --sf-green: #3BA755;
+      --sf-orange: #FF6B35;
+      --bg: #F3F7FB;
+      --card: #ffffff;
+      --text: #032D60;
+      --muted: #6B7A8D;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(135deg, #032D60 0%, #00A1E0 60%, #06A59A 100%);
+      padding: 60px 24px 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 320px; height: 320px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.05);
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -60px; left: -60px;
+      width: 240px; height: 240px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.04);
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.15);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+      backdrop-filter: blur(4px);
+    }
+    .hero h1 {
+      color: #fff;
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+    .hero h1 span { color: #7FD8FF; }
+    .hero p {
+      color: rgba(255,255,255,0.8);
+      font-size: 18px;
+      max-width: 540px;
+      margin: 0 auto 32px;
+      line-height: 1.6;
+    }
+    .hero-avatars {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 32px;
+    }
+    .avatar-card {
+      background: rgba(255,255,255,0.12);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 16px;
+      padding: 20px 28px;
+      color: #fff;
+      min-width: 160px;
+    }
+    .avatar-emoji { font-size: 40px; margin-bottom: 8px; }
+    .avatar-name { font-weight: 700; font-size: 16px; }
+    .avatar-role { font-size: 12px; opacity: 0.75; margin-top: 4px; }
+
+    /* NAV TABS */
+    .tabs {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      padding: 28px 24px 0;
+      flex-wrap: wrap;
+    }
+    .tab {
+      padding: 10px 22px;
+      border-radius: 30px;
+      border: 2px solid #D1E4F0;
+      background: #fff;
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .tab:hover { border-color: var(--sf-blue); color: var(--sf-blue); }
+    .tab.active {
+      background: var(--sf-blue);
+      border-color: var(--sf-blue);
+      color: #fff;
+    }
+
+    /* SECTIONS */
+    .section { display: none; padding: 32px 24px 60px; max-width: 900px; margin: 0 auto; }
+    .section.active { display: block; }
+
+    .section-title {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--sf-dark);
+      margin-bottom: 6px;
+    }
+    .section-sub {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 28px;
+    }
+
+    /* CHECKLIST */
+    .checklist-group { margin-bottom: 28px; }
+    .checklist-group-title {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--sf-blue);
+      margin-bottom: 12px;
+    }
+    .check-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 18px;
+      background: #fff;
+      border-radius: 12px;
+      margin-bottom: 8px;
+      border: 2px solid #E8F0F8;
+      cursor: pointer;
+      transition: all 0.2s;
+      user-select: none;
+    }
+    .check-item:hover { border-color: var(--sf-blue); }
+    .check-item.done {
+      border-color: var(--sf-green);
+      background: #F0FBF3;
+    }
+    .check-item.done .check-label { text-decoration: line-through; color: var(--muted); }
+    .check-box {
+      width: 22px; height: 22px;
+      border-radius: 6px;
+      border: 2px solid #CBD5E0;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      transition: all 0.2s;
+      font-size: 13px;
+    }
+    .check-item.done .check-box {
+      background: var(--sf-green);
+      border-color: var(--sf-green);
+      color: #fff;
+    }
+    .check-label { font-size: 15px; font-weight: 500; }
+
+    /* PROGRESS BAR */
+    .progress-bar-wrap {
+      background: #E8F0F8;
+      border-radius: 20px;
+      height: 10px;
+      margin-bottom: 28px;
+      overflow: hidden;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--sf-blue), var(--sf-teal));
+      border-radius: 20px;
+      transition: width 0.4s ease;
+    }
+    .progress-label {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    /* TEAM GRID */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+    }
+    .team-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 20px;
+      border: 2px solid #E8F0F8;
+      text-align: center;
+      transition: all 0.2s;
+    }
+    .team-card:hover { border-color: var(--sf-blue); transform: translateY(-2px); }
+    .team-avatar {
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+      margin: 0 auto 12px;
+    }
+    .team-name { font-weight: 700; font-size: 15px; margin-bottom: 4px; }
+    .team-role { font-size: 12px; color: var(--muted); line-height: 1.4; }
+    .team-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-top: 8px;
+    }
+
+    /* RESOURCES */
+    .resource-group { margin-bottom: 32px; }
+    .resource-group-title {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--sf-purple);
+      margin-bottom: 12px;
+    }
+    .resource-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 13px 18px;
+      background: #fff;
+      border-radius: 12px;
+      margin-bottom: 8px;
+      border: 2px solid #E8F0F8;
+      text-decoration: none;
+      color: var(--text);
+      transition: all 0.2s;
+    }
+    .resource-item:hover { border-color: var(--sf-purple); transform: translateX(4px); }
+    .resource-icon { font-size: 18px; flex-shrink: 0; }
+    .resource-name { font-weight: 600; font-size: 14px; }
+    .resource-arrow { margin-left: auto; color: var(--muted); font-size: 16px; }
+
+    /* WEEK SCHEDULE */
+    .week-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+    }
+    .day-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 20px;
+      border: 2px solid #E8F0F8;
+    }
+    .day-label {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 14px;
+    }
+    .meeting-item {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+    .meeting-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      margin-top: 6px;
+      flex-shrink: 0;
+    }
+    .meeting-text { font-size: 13px; line-height: 1.5; }
+    .meeting-with { font-weight: 600; }
+    .meeting-desc { color: var(--muted); font-size: 12px; }
+
+    /* XP COUNTER */
+    .xp-bar {
+      background: linear-gradient(135deg, var(--sf-dark), var(--sf-purple));
+      border-radius: 16px;
+      padding: 20px 24px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 28px;
+    }
+    .xp-icon { font-size: 36px; }
+    .xp-info { flex: 1; }
+    .xp-title { font-size: 13px; opacity: 0.8; margin-bottom: 4px; }
+    .xp-value { font-size: 28px; font-weight: 900; }
+    .xp-level {
+      background: rgba(255,255,255,0.15);
+      border-radius: 20px;
+      padding: 6px 16px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    /* CONFETTI on complete */
+    @keyframes pop { 0% { transform: scale(1); } 50% { transform: scale(1.3); } 100% { transform: scale(1); } }
+    .check-item.done .check-box { animation: pop 0.3s ease; }
+
+    /* RESPONSIVE */
+    @media (max-width: 600px) {
+      .hero-avatars { flex-direction: column; align-items: center; }
+      .tabs { gap: 6px; }
+      .tab { padding: 8px 14px; font-size: 13px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">✨ SPM France — FY27</div>
+  <h1>Welcome <span>Jude</span> &amp; <span>Eliott</span>! 🎉</h1>
+  <p>Your Salesforce adventure starts here. This is your onboarding hub — everything you need for a successful first weeks.</p>
+  <div class="hero-avatars">
+    <div class="avatar-card">
+      <div class="avatar-emoji">🧑‍💼</div>
+      <div class="avatar-name">Jude Buyikana</div>
+      <div class="avatar-role">Sales Program Apprentice</div>
+    </div>
+    <div class="avatar-card">
+      <div class="avatar-emoji">🧑‍💼</div>
+      <div class="avatar-name">Eliott Catoir</div>
+      <div class="avatar-role">Sales Program Intern</div>
+    </div>
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="tabs">
+  <div class="tab active" onclick="showTab('checklist')">✅ Week 1 Actions</div>
+  <div class="tab" onclick="showTab('team')">👥 The Team</div>
+  <div class="tab" onclick="showTab('schedule')">📅 Schedule</div>
+  <div class="tab" onclick="showTab('resources')">📚 Resources</div>
+</div>
+
+<!-- CHECKLIST -->
+<div id="checklist" class="section active">
+  <div class="section-title">Your Week 1 Checklist</div>
+  <div class="section-sub">Check off tasks as you go — you're leveling up! 🚀</div>
+
+  <div class="xp-bar">
+    <div class="xp-icon">⚡</div>
+    <div class="xp-info">
+      <div class="xp-title">Onboarding XP</div>
+      <div class="xp-value" id="xp-count">0 / 14 tasks</div>
+    </div>
+    <div class="xp-level" id="xp-level">🌱 Rookie</div>
+  </div>
+
+  <div class="progress-label" id="progress-label">0% complete</div>
+  <div class="progress-bar-wrap">
+    <div class="progress-bar-fill" id="progress-fill" style="width:0%"></div>
+  </div>
+
+  <div class="checklist-group">
+    <div class="checklist-group-title">🔑 Access</div>
+    <div class="check-item" onclick="toggle(this)"><div class="check-box"></div><div class="check-label">Get access to Tableau</div></div>
+    <div class="check-item" onclick="toggle(this)"><div class="check-box"></div><div class="check-label">Get access to Snowflake</div></div>
+    <div class="check-item" onclick="toggle(this)"><div class="check-box"></div><div class="check-label">Get access to Claude (Salesforce)</div></div>
+    <div class="check-item" onclick="toggle(this)"><div class="check-box"></div><div class="check-label">Request GSDO dataset access (/GDSO Dataset Access in Slack)</div></div>
+    <div class="check-item" onclick="toggle(this)"><div class="check-box"></div><div class="check-label">Join main SPM Slack channels</div></div>
+  </div>
+
+  <div class="checklist-group">
+    <div class="checklist-group-title">👥 Meet the Team</div>
+    <div class="check-item" onclick="toggle(this)"><div class="check-box"></div><div class="check-label">1:1 with Iona Guily</div></div>
+    <div class="check-item" onclick="toggle(this)"><div class="check-box"></div><div class="check-label">1:1 with Clémence Fabre</div></div>
+    <div class="check-item" onclick="toggle(this)"><div class="check-box"></div><div class="check-label">1:1 with Ana Racheru</div></div>
+    <div class="check-item" onclick="toggle(this)"><div class="check-box"></div><div class="check-label">1:1 with Louis Sibillotte</div></div>
+    <div class="check-item" onclick="toggle(this)"><div class="check-box"></div><div class="check-label">Meet at least 1 person from Strategy, Enablement, Sales Dev & ECS</div></div>
+  </div>
+
+  <div class="checklist-group">
+    <div class="checklist-group-title">🚀 First Missions</div>
+    <div class="check-item" onclick="toggle(this)"><div class="check-box"></div><div class="check-label">Start working on the Programs tracker app</div></div>
+    <div class="check-item" onclick="toggle(this)"><div class="check-box"></div><div class="check-label">Help Ana on the C&C Program</div></div>
+    <div class="check-item" onclick="toggle(this)"><div class="check-box"></div><div class="check-label">Watch Dreamforce replays</div></div>
+    <div class="check-item" onclick="toggle(this)"><div class="check-box"></div><div class="check-label">Read the FY27 France Sales Programs Playbook</div></div>
+  </div>
+</div>
+
+<!-- TEAM -->
+<div id="team" class="section">
+  <div class="section-title">Meet Your Team 👋</div>
+  <div class="section-sub">Click on any direct to see their team.</div>
+
+  <!-- ORG CHART -->
+  <div class="org-wrap">
+
+    <!-- THOMAS (root) -->
+    <div class="org-root">
+      <div class="org-node org-coo" onclick="toggleDirects('thomas')">
+        <div class="org-emoji">👨‍💼</div>
+        <div class="org-name">Thomas Rivoire</div>
+        <div class="org-role">SVP, COO</div>
+        <div class="org-chevron open" id="chev-thomas">▾</div>
+      </div>
+    </div>
+
+    <!-- CONNECTOR LINE root → directs -->
+    <div class="org-vline"></div>
+    <div class="org-hline-wrap" id="hline-thomas" style="display:flex;">
+      <div class="org-hline"></div>
+    </div>
+
+    <!-- DIRECTS ROW -->
+    <div class="org-directs" id="directs-thomas" style="display:flex;">
+      <!-- Alexandre -->
+      <div class="org-direct-col">
+        <div class="org-vline-top"></div>
+        <div class="org-node org-programs" onclick="toggleDirects('alexandre')">
+          <div class="org-emoji">👨‍💼</div>
+          <div class="org-name">Alexandre Beaufils</div>
+          <div class="org-role">Director, Programs</div>
+          <span class="org-tag" style="background:#3BA755;">Your Manager ⭐</span>
+          <div class="org-chevron" id="chev-alexandre">▾</div>
+        </div>
+        <div class="org-vline-sub" id="vsub-alexandre"></div>
+        <div class="org-sub-panel" id="sub-alexandre">
+          <div class="org-sub-title">SPM France Team</div>
+          <div class="org-sub-member"><span>👩‍💼</span> Iona Guily — Program Mgmt</div>
+          <div class="org-sub-member"><span>👩‍💻</span> Clémence Fabre — Programs Manager</div>
+          <div class="org-sub-member"><span>👩‍🔬</span> Ana Racheru — Program Mgmt</div>
+          <div class="org-sub-member"><span>👨‍💻</span> Louis Sibillotte — Programs · Data</div>
+          <div class="org-sub-member you"><span>🧑‍💼</span> Jude Buyikana — Apprentice</div>
+          <div class="org-sub-member you"><span>🧑‍💼</span> Eliott Catoir — Intern</div>
+        </div>
+      </div>
+
+      <!-- Fatos -->
+      <div class="org-direct-col">
+        <div class="org-vline-top"></div>
+        <div class="org-node" style="border-color:#032D60;" onclick="toggleDirects('fatos')">
+          <div class="org-emoji">👨‍💼</div>
+          <div class="org-name">Fatos Berisha</div>
+          <div class="org-role">Director, Forward Deployed</div>
+          <span class="org-tag" style="background:#032D60;">FDE</span>
+          <div class="org-chevron" id="chev-fatos">▾</div>
+        </div>
+        <div class="org-vline-sub" id="vsub-fatos"></div>
+        <div class="org-sub-panel" id="sub-fatos">
+          <div class="org-sub-title">Forward Deployed</div>
+        </div>
+      </div>
+
+      <!-- Evane -->
+      <div class="org-direct-col">
+        <div class="org-vline-top"></div>
+        <div class="org-node" style="border-color:#06A59A;" onclick="toggleDirects('evane')">
+          <div class="org-emoji">👩‍💼</div>
+          <div class="org-name">Evane Beurel</div>
+          <div class="org-role">CEO of Office Apprentice</div>
+          <span class="org-tag" style="background:#06A59A;">COO Office</span>
+          <div class="org-chevron" id="chev-evane">▾</div>
+        </div>
+        <div class="org-vline-sub" id="vsub-evane"></div>
+        <div class="org-sub-panel" id="sub-evane">
+          <div class="org-sub-title">COO Office</div>
+        </div>
+      </div>
+
+      <!-- Jeremy -->
+      <div class="org-direct-col">
+        <div class="org-vline-top"></div>
+        <div class="org-node org-strategy" onclick="toggleDirects('jeremy')">
+          <div class="org-emoji">👨‍💼</div>
+          <div class="org-name">Jeremy Porteix</div>
+          <div class="org-role">Head of Field Strategy</div>
+          <span class="org-tag" style="background:#FF6B35;">Strategy</span>
+          <div class="org-chevron" id="chev-jeremy">▾</div>
+        </div>
+        <div class="org-vline-sub" id="vsub-jeremy"></div>
+        <div class="org-sub-panel" id="sub-jeremy">
+          <div class="org-sub-title">Field Strategy Team</div>
+          <div class="org-sub-member">👩‍💼 Enora N. Sophie Barbier — Intern</div>
+          <div class="org-sub-member">👨‍💼 Enzo Berreur — Associate Analyst</div>
+          <div class="org-sub-member">👩‍💼 Samia Bertal — Analyst</div>
+          <div class="org-sub-member">👨‍💼 Richard Farriaux — Sr Analyst</div>
+          <div class="org-sub-member">👨‍💼 Thomas Meslier — Manager</div>
+          <div class="org-sub-member">👩‍💼 Noemie Michot — Lead</div>
+          <div class="org-sub-member">👨‍💼 Louis Mogenet — Analyst</div>
+        </div>
+      </div>
+
+      <!-- Celine -->
+      <div class="org-direct-col">
+        <div class="org-vline-top"></div>
+        <div class="org-node org-enablement" onclick="toggleDirects('celine')">
+          <div class="org-emoji">👩‍🏫</div>
+          <div class="org-name">Celine Laffargue</div>
+          <div class="org-role">Director, Enablement</div>
+          <span class="org-tag" style="background:#06A59A;">Enablement</span>
+          <div class="org-chevron" id="chev-celine">▾</div>
+        </div>
+        <div class="org-vline-sub" id="vsub-celine"></div>
+        <div class="org-sub-panel" id="sub-celine">
+          <div class="org-sub-title">Enablement Team</div>
+          <div class="org-sub-member">👨‍💼 Noufel Berrama — Sales Enablement</div>
+          <div class="org-sub-member">👨‍💼 Stéphane Baudet-Lambert — Sales Leaders Excellence</div>
+          <div class="org-sub-member">👩‍💼 Ombeline Challet — Enablement Manager</div>
+          <div class="org-sub-member">👩‍💼 Cécile Denis — Productivity Director</div>
+          <div class="org-sub-member">👩‍💼 Ingrid Lesellier — Enablement Sr Manager</div>
+          <div class="org-sub-member">👩‍💼 Inès Rambaud — Enablement Specialist</div>
+        </div>
+      </div>
+
+      <!-- Severine -->
+      <div class="org-direct-col">
+        <div class="org-vline-top"></div>
+        <div class="org-node org-salesdev" onclick="toggleDirects('severine')">
+          <div class="org-emoji">👩‍💼</div>
+          <div class="org-name">Severine Georges-Tudo</div>
+          <div class="org-role">Sr. Director, Sales Dev</div>
+          <span class="org-tag" style="background:#00A1E0;">Sales Dev</span>
+          <div class="org-chevron" id="chev-severine">▾</div>
+        </div>
+        <div class="org-vline-sub" id="vsub-severine"></div>
+        <div class="org-sub-panel" id="sub-severine">
+          <div class="org-sub-title">Sales Development Team</div>
+          <div class="org-sub-member">👨‍💼 Pierre Bonnevie — Head of SalesDev</div>
+          <div class="org-sub-member">👨‍💼 Stanislas de Lassus — Manager, Sales Dev</div>
+          <div class="org-sub-member">👩‍💼 Julie Cottard — Director, Sales Dev</div>
+        </div>
+      </div>
+
+      <!-- Yuval -->
+      <div class="org-direct-col">
+        <div class="org-vline-top"></div>
+        <div class="org-node org-ecs" onclick="toggleDirects('yuval')">
+          <div class="org-emoji">👨‍💼</div>
+          <div class="org-name">Yuval Schwartz</div>
+          <div class="org-role">ECS</div>
+          <span class="org-tag" style="background:#7B5EA7;">ECS</span>
+          <div class="org-chevron" id="chev-yuval">▾</div>
+        </div>
+        <div class="org-vline-sub" id="vsub-yuval"></div>
+        <div class="org-sub-panel" id="sub-yuval">
+          <div class="org-sub-title">ECS Team</div>
+          <div class="org-sub-member">👨‍💼 Romain Lacour — RVP Sales</div>
+          <div class="org-sub-member">👨‍💼 Guillaume Dainche — Regional Sales Director</div>
+          <div class="org-sub-member">👨‍💼 Gregory Degrange — RVP, Sales</div>
+          <div class="org-sub-member">👨‍💼 Gaultier Dumas — Senior Manager, Sales</div>
+        </div>
+      </div>
+
+      <!-- Sarah -->
+      <div class="org-direct-col">
+        <div class="org-vline-top"></div>
+        <div class="org-node org-strategy" onclick="toggleDirects('sarah')">
+          <div class="org-emoji">👩‍💼</div>
+          <div class="org-name">Sarah Smets</div>
+          <div class="org-role">Director, Sales Strategy</div>
+          <span class="org-tag" style="background:#FF6B35;">Strategy</span>
+          <div class="org-chevron" id="chev-sarah">▾</div>
+        </div>
+        <div class="org-vline-sub" id="vsub-sarah"></div>
+        <div class="org-sub-panel" id="sub-sarah">
+          <div class="org-sub-title">Sales Strategy</div>
+          <div class="org-sub-member">👩‍💼 Caroline Lalère — Senior Manager</div>
+          <div class="org-sub-member">👨‍💼 Bertrand Audousset — Sr Manager</div>
+          <div class="org-sub-member">👩‍💼 Marine Flipo — BU Management</div>
+          <div class="org-sub-member">👨‍💼 Stan Marcoulides — Lead</div>
+          <div class="org-sub-member">👨‍💼 Nicolas Mardrus — Manager</div>
+          <div class="org-sub-member">👩‍💼 Thais Numeric — BU Management</div>
+          <div class="org-sub-member">👩‍💼 Flore Tarbouriech — Lead</div>
+          <div class="org-sub-member">👨‍💼 Guillaume Torrejon — Director, BU</div>
+        </div>
+      </div>
+
+      <!-- Nathalie -->
+      <div class="org-direct-col">
+        <div class="org-vline-top"></div>
+        <div class="org-node" style="border-color:#6B7A8D;" onclick="toggleDirects('nathalie')">
+          <div class="org-emoji">👩‍💼</div>
+          <div class="org-name">Nathalie Mulot</div>
+          <div class="org-role">Senior Executive Asst</div>
+          <span class="org-tag" style="background:#6B7A8D;">COO Office</span>
+          <div class="org-chevron" id="chev-nathalie">▾</div>
+        </div>
+        <div class="org-vline-sub" id="vsub-nathalie"></div>
+        <div class="org-sub-panel" id="sub-nathalie">
+          <div class="org-sub-title">COO Office</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .org-wrap { padding: 8px 0 24px; }
+    .org-root { display: flex; justify-content: center; }
+    .org-node {
+      background: #fff;
+      border: 2px solid #D1E4F0;
+      border-radius: 14px;
+      padding: 14px 18px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      min-width: 140px;
+      max-width: 180px;
+      position: relative;
+    }
+    .org-node:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,161,224,0.15); }
+    .org-coo { border-color: #032D60; background: #032D60; color: #fff; }
+    .org-coo .org-role { color: rgba(255,255,255,0.7); }
+    .org-programs { border-color: #3BA755; }
+    .org-strategy { border-color: #FF6B35; }
+    .org-enablement { border-color: #06A59A; }
+    .org-salesdev { border-color: #00A1E0; }
+    .org-ecs { border-color: #7B5EA7; }
+    .org-emoji { font-size: 24px; margin-bottom: 6px; }
+    .org-name { font-weight: 700; font-size: 13px; line-height: 1.3; }
+    .org-role { font-size: 11px; color: var(--muted); margin-top: 3px; }
+    .org-tag {
+      display: inline-block;
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 20px;
+      margin-top: 6px;
+    }
+    .org-chevron {
+      font-size: 14px;
+      margin-top: 6px;
+      color: var(--muted);
+      transition: transform 0.2s;
+    }
+    .org-chevron.open { transform: rotate(180deg); }
+
+    /* CONNECTOR LINES */
+    .org-vline {
+      width: 2px; height: 20px;
+      background: #D1E4F0;
+      margin: 0 auto;
+    }
+    .org-hline-wrap { display: flex; justify-content: center; }
+    .org-hline {
+      height: 2px;
+      background: #D1E4F0;
+      width: 90%;
+    }
+    .org-vline-top {
+      width: 2px; height: 20px;
+      background: #D1E4F0;
+      margin: 0 auto;
+    }
+    .org-vline-sub {
+      width: 2px; height: 0;
+      background: #D1E4F0;
+      margin: 0 auto;
+      transition: height 0.3s ease;
+    }
+    .org-vline-sub.open { height: 14px; }
+
+    /* DIRECTS ROW */
+    .org-directs {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding: 0 8px;
+    }
+    .org-direct-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* SUB PANEL */
+    .org-sub-panel {
+      background: #F8FBFF;
+      border: 2px solid #D1E4F0;
+      border-radius: 12px;
+      padding: 0;
+      max-width: 200px;
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.35s ease, padding 0.2s;
+    }
+    .org-sub-panel.open {
+      max-height: 600px;
+      padding: 12px 14px;
+    }
+    .org-sub-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--sf-blue);
+      margin-bottom: 8px;
+    }
+    .org-sub-member {
+      font-size: 12px;
+      color: var(--text);
+      padding: 4px 0;
+      border-bottom: 1px solid #EAF1F8;
+      line-height: 1.4;
+    }
+    .org-sub-member:last-child { border-bottom: none; }
+    .org-sub-member.you { font-weight: 700; color: var(--sf-blue); }
+
+    /* GTM MODEL */
+    .gtm-wrap {
+      margin-top: 40px;
+      background: var(--card);
+      border-radius: 16px;
+      padding: 28px;
+      box-shadow: 0 2px 12px rgba(3,45,96,0.08);
+    }
+    .gtm-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--sf-dark);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .gtm-img {
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid #EAF1F8;
+      display: block;
+    }
+  </style>
+
+  <!-- GTM MODEL -->
+  <div class="gtm-wrap">
+    <div class="gtm-title">🗺️ FY27 GTM Model — France</div>
+    <img src="fy27-gtm-france.png" alt="FY27 GTM Model France" class="gtm-img" />
+  </div>
+</div>
+
+<!-- SCHEDULE -->
+<div id="schedule" class="section">
+  <div class="section-title">Week 1 Schedule 📅</div>
+  <div class="section-sub">Key meetings to get you up to speed fast.</div>
+  <div class="week-grid">
+    <div class="day-card">
+      <div class="day-label" style="color:#00A1E0;">Monday — Day 1</div>
+      <div class="meeting-item">
+        <div class="meeting-dot" style="background:#FF6B35;"></div>
+        <div class="meeting-text">
+          <div class="meeting-with">Introduction Sales Programs ☕</div>
+          <div class="meeting-desc">Coffee & onboarding intro to the programs</div>
+        </div>
+      </div>
+      <div class="meeting-item">
+        <div class="meeting-dot" style="background:#00A1E0;"></div>
+        <div class="meeting-text">
+          <div class="meeting-with">Monday Team Meeting</div>
+          <div class="meeting-desc">Weekly team sync — whole SPM team</div>
+        </div>
+      </div>
+      <div class="meeting-item">
+        <div class="meeting-dot" style="background:#3BA755;"></div>
+        <div class="meeting-text">
+          <div class="meeting-with">Orga Clouds — Ana</div>
+          <div class="meeting-desc">France cloud org structure & programs</div>
+        </div>
+      </div>
+      <div class="meeting-item">
+        <div class="meeting-dot" style="background:#7B5EA7;"></div>
+        <div class="meeting-text">
+          <div class="meeting-with">Data Access</div>
+          <div class="meeting-desc">Setup Tableau, Snowflake & GSDO access</div>
+        </div>
+      </div>
+    </div>
+    <div class="day-card">
+      <div class="day-label" style="color:#7B5EA7;">Tuesday</div>
+      <div class="meeting-item">
+        <div class="meeting-dot" style="background:#7B5EA7;"></div>
+        <div class="meeting-text">
+          <div class="meeting-with">Slack Channels Tour — Iona</div>
+          <div class="meeting-desc">Les canaux essentiels à suivre</div>
+        </div>
+      </div>
+    </div>
+    <div class="day-card">
+      <div class="day-label" style="color:#FF6B35;">Wednesday</div>
+      <div class="meeting-item">
+        <div class="meeting-dot" style="background:#FF6B35;"></div>
+        <div class="meeting-text">
+          <div class="meeting-with">Équipe étendue — Clémence</div>
+          <div class="meeting-desc">Rencontrer les autres équipes COO</div>
+        </div>
+      </div>
+      <div class="meeting-item">
+        <div class="meeting-dot" style="background:#00A1E0;"></div>
+        <div class="meeting-text">
+          <div class="meeting-with">Dreamforce Replays</div>
+          <div class="meeting-desc">Watch key announcements — Day 1</div>
+        </div>
+      </div>
+    </div>
+    <div class="day-card">
+      <div class="day-label" style="color:#06A59A;">Thursday</div>
+      <div class="meeting-item">
+        <div class="meeting-dot" style="background:#06A59A;"></div>
+        <div class="meeting-text">
+          <div class="meeting-with">Dreamforce Replays</div>
+          <div class="meeting-desc">Watch key announcements — Day 2</div>
+        </div>
+      </div>
+    </div>
+    <div class="day-card">
+      <div class="day-label" style="color:#3BA755;">Friday</div>
+      <div class="meeting-item">
+        <div class="meeting-dot" style="background:#3BA755;"></div>
+        <div class="meeting-text">
+          <div class="meeting-with">Programs tracker app kick-off</div>
+          <div class="meeting-desc">First steps on the tracker project</div>
+        </div>
+      </div>
+      <div class="meeting-item">
+        <div class="meeting-dot" style="background:#00A1E0;"></div>
+        <div class="meeting-text">
+          <div class="meeting-with">Week 1 wrap-up</div>
+          <div class="meeting-desc">Debrief, questions, next steps</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RESOURCES -->
+<div id="resources" class="section">
+  <div class="section-title">Key Resources 📚</div>
+  <div class="section-sub">Everything you need, all in one place.</div>
+
+  <div class="resource-group">
+    <div class="resource-group-title">📖 FY27 Must-Read</div>
+    <a class="resource-item" href="https://docs.google.com/presentation/d/1-0ja78Rol4dmMow8hyHfu3E-TZw-nxfHHkfd-aK459I/edit" target="_blank">
+      <span class="resource-icon">📘</span><span class="resource-name">FY27 France COO Playbook</span><span class="resource-arrow">→</span>
+    </a>
+    <a class="resource-item" href="https://docs.google.com/presentation/d/1nWGJtBn_Vx8jgz6tk-C6xWdlGHVMi-7OKf8rvlOiR1M/edit" target="_blank">
+      <span class="resource-icon">📗</span><span class="resource-name">FY27 France Sales Programs Playbook</span><span class="resource-arrow">→</span>
+    </a>
+    <a class="resource-item" href="https://docs.google.com/presentation/d/1XJlOdzPOuAvXLueSJfy9LrlVOzZVmbMzwEty7PcgvRs/edit" target="_blank">
+      <span class="resource-icon">🗺️</span><span class="resource-name">FY27 France GTM</span><span class="resource-arrow">→</span>
+    </a>
+    <a class="resource-item" href="https://salesforce.enterprise.slack.com/docs/T01G0063H29/F08JD3204M6" target="_blank">
+      <span class="resource-icon">🏪</span><span class="resource-name">France Sales Management — Asset One Stop Shop</span><span class="resource-arrow">→</span>
+    </a>
+  </div>
+
+  <div class="resource-group">
+    <div class="resource-group-title">📊 Pipeline & Programs</div>
+    <a class="resource-item" href="https://docs.google.com/presentation/d/1XZNh5-RgFr-oCLhYXTIglx49DBM1jHImGGDOVQbaibw/edit" target="_blank">
+      <span class="resource-icon">🔍</span><span class="resource-name">FY25 Quality Pipeline Playbook</span><span class="resource-arrow">→</span>
+    </a>
+    <a class="resource-item" href="https://salesforce.highspot.com/items/63d80a4cce62f5ef680d4c30" target="_blank">
+      <span class="resource-icon">📈</span><span class="resource-name">Pipeline Management Playbook (Highspot)</span><span class="resource-arrow">→</span>
+    </a>
+    <a class="resource-item" href="https://salesforce.enterprise.slack.com/docs/T01G0063H29/F091FH6SYSU" target="_blank">
+      <span class="resource-icon">💰</span><span class="resource-name">FY27 Global Monetization Program Activation</span><span class="resource-arrow">→</span>
+    </a>
+    <a class="resource-item" href="https://drive.google.com/drive/folders/1Am-mvQHsWnzXI9mnUKomsXDAOfKSHWRt" target="_blank">
+      <span class="resource-icon">📁</span><span class="resource-name">Google Drive — FY27 France Sales Programs Folder</span><span class="resource-arrow">→</span>
+    </a>
+  </div>
+
+  <div class="resource-group">
+    <div class="resource-group-title">🤖 AI & Data Tools</div>
+    <a class="resource-item" href="https://salesforce.enterprise.slack.com/docs/T01G0063H29/F0BT7192XRA" target="_blank">
+      <span class="resource-icon">❄️</span><span class="resource-name">FY27 Sales Programs Prompts & Snowflake Queries</span><span class="resource-arrow">→</span>
+    </a>
+    <a class="resource-item" href="https://salesforce.enterprise.slack.com/docs/T01G0063H29/F06FQ834WET" target="_blank">
+      <span class="resource-icon">🤖</span><span class="resource-name">Salesforce AI Tools</span><span class="resource-arrow">→</span>
+    </a>
+    <a class="resource-item" href="https://qlabs-org.my.site.com/aisellerhub/?tab=tools" target="_blank">
+      <span class="resource-icon">🧠</span><span class="resource-name">AI Library for AEs, Leaders & SEs</span><span class="resource-arrow">→</span>
+    </a>
+    <a class="resource-item" href="https://salesforce.enterprise.slack.com/docs/T01G0063H29/F09FZ92KNG6" target="_blank">
+      <span class="resource-icon">💬</span><span class="resource-name">The Most Stealable Slackbot Prompts</span><span class="resource-arrow">→</span>
+    </a>
+    <a class="resource-item" href="https://git.soma.salesforce.com/pages/pguerlet/q2-program-hub/" target="_blank">
+      <span class="resource-icon">🚀</span><span class="resource-name">Claude Program Hub App</span><span class="resource-arrow">→</span>
+    </a>
+  </div>
+
+  <div class="resource-group">
+    <div class="resource-group-title">🔧 Useful Links</div>
+    <a class="resource-item" href="https://docs.google.com/spreadsheets/u/0/d/1vakuS2Z-pNfDjyonP5983Ka5q6glI-oY8a2VCx7z8LU/htmlview" target="_blank">
+      <span class="resource-icon">📋</span><span class="resource-name">List Executive Assistant France</span><span class="resource-arrow">→</span>
+    </a>
+    <a class="resource-item" href="https://salesforce.quip.com/XCe0A4KW3n8n" target="_blank">
+      <span class="resource-icon">✈️</span><span class="resource-name">Sales Programs EMEA — T&E Guidance</span><span class="resource-arrow">→</span>
+    </a>
+  </div>
+</div>
+
+<script>
+  function toggleDirects(id) {
+    if (id === 'thomas') {
+      const directs = document.getElementById('directs-thomas');
+      const hline = document.getElementById('hline-thomas');
+      const chev = document.getElementById('chev-thomas');
+      const open = directs.style.display !== 'none' && directs.style.display !== '';
+      if (open) {
+        directs.style.display = 'none';
+        hline.style.display = 'none';
+        chev.classList.remove('open');
+      } else {
+        directs.style.display = 'flex';
+        hline.style.display = 'flex';
+        chev.classList.add('open');
+      }
+      return;
+    }
+    const panel = document.getElementById('sub-' + id);
+    const vsub = document.getElementById('vsub-' + id);
+    const chev = document.getElementById('chev-' + id);
+    if (!panel) return;
+    const isOpen = panel.classList.contains('open');
+    panel.classList.toggle('open');
+    vsub && vsub.classList.toggle('open');
+    chev && chev.classList.toggle('open');
+  }
+
+  function showTab(id) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    event.target.classList.add('active');
+  }
+
+  function toggle(el) {
+    el.classList.toggle('done');
+    if (el.classList.contains('done')) {
+      el.querySelector('.check-box').innerHTML = '✓';
+    } else {
+      el.querySelector('.check-box').innerHTML = '';
+    }
+    updateProgress();
+  }
+
+  function updateProgress() {
+    const all = document.querySelectorAll('.check-item');
+    const done = document.querySelectorAll('.check-item.done');
+    const pct = Math.round((done.length / all.length) * 100);
+
+    document.getElementById('progress-fill').style.width = pct + '%';
+    document.getElementById('progress-label').textContent = pct + '% complete';
+    document.getElementById('xp-count').textContent = done.length + ' / ' + all.length + ' tasks';
+
+    let level = '🌱 Rookie';
+    if (pct >= 25) level = '⚡ Getting Started';
+    if (pct >= 50) level = '🔥 In the Zone';
+    if (pct >= 75) level = '🚀 Almost There';
+    if (pct === 100) level = '🏆 Onboarding Champion!';
+    document.getElementById('xp-level').textContent = level;
+  }
+</script>
+
+</body>
+</html>
